@@ -6,79 +6,59 @@ PatientManager::PatientManager(const std::string& fileName)
 	loadFromFile();
 }
 
-void PatientManager::loadFromFile()
-{
-	std::ifstream fin(fileName);
-	if (!fin) {
-		std::cerr << "Error opening file\n";
-		return;
-	}
-	patients.clear();
+void PatientManager::loadFromFile() {
+    std::ifstream fin(fileName);
+    if (!fin) {
+        std::cerr << "Error opening file\n";
+        return;
+    }
 
-	std::string line;
-	while (std::getline(fin, line)) {
-		
-		std::string type, firstName, lastName, gender, medicalHistory, token, illness, doctor, date;
-		Data* birthDate;
-		size_t pos = line.find(',');
-		type = line.substr(0, pos);
-		line.erase(0, pos + 1);
+    patients.clear();
 
-		if (type == "Patient") {
-			pos = line.find(',');
-			firstName = line.substr(0, pos);
-			line.erase(0, pos + 1);
+    std::string line;
+    while (std::getline(fin, line)) {
+        std::string type, firstName, lastName, gender, medicalHistory, illness, doctor, date;
+        int day, month, year;
 
-			pos = line.find(',');
-			lastName = line.substr(0, pos);
-			line.erase(0, pos + 1);
+        std::istringstream iss(line);
+        std::getline(iss, type, ',');
 
-			pos = line.find(',');
-			birthDate->day = stoi(line.substr(0, pos));
-			line.erase(0, pos + 1);
-			pos = line.find(',');
-			birthDate->month = stoi(line.substr(0, pos));
-			line.erase(0, pos + 1);
-			pos = line.find(',');
-			birthDate->year = stoi(line.substr(0, pos));
-			line.erase(0, pos + 1);
+        if (type == "Patient") {
+            std::getline(iss, firstName, ',');
+            std::getline(iss, lastName, ',');
 
-			pos = line.find(',');
-			gender = line.substr(0, pos);
-			line.erase(0, pos + 1);
+            char delimiter;
+            iss >> day >> delimiter >> month >> delimiter >> year;
 
-			pos = line.find(',');
-			medicalHistory = line.substr(0, pos);
-			line.erase(0, pos + 1);
+            std::getline(iss, gender, ',');
+            std::getline(iss, medicalHistory, ',');
 
-			Patient patient(firstName, lastName, birthDate, gender, medicalHistory);
+            Patient patient(firstName, lastName, day, month, year, gender, medicalHistory);
 
-			while (!line.empty()) {
-				pos = line.find(';');
-				illness = line.substr(0, pos);
-				line.erase(0, pos + 1);
-				patient.set_familyMedicalHistory(illness);
-			}
+            while (std::getline(iss, illness, ';')) {
+                patient.set_familyMedicalHistory(illness);
+            }
 
-			/*while (std::getline(fin, line, ';')) {
-				pos = line.find(':');
-				firstName = line.substr(0, pos);
-				line.erase(0, pos + 1);
-				date = line;
+            while (std::getline(fin, line, ';')) {
+                std::istringstream appointmentIss(line);
+                std::getline(appointmentIss, firstName, ':');
+                std::getline(appointmentIss, date, ':');
+                std::getline(appointmentIss, lastName, ':');
 
-				pos = line.find(':');
-				lastName = line.substr(0, pos);
-				line.erase(0, pos + 1);
-				date = line;
+                appointmentIss >> day >> delimiter >> month >> delimiter >> year;
 
-				patient.set_appointment(firstName, lastName, date);
-			}*/
+                Data appointmentDate(day, month, year);
 
-			
-			patients.push_back(patient);
-		}
-	}
+                patient.set_appointment(firstName, lastName, appointmentDate);
+            }
+
+            patients.push_back(patient);
+        }
+    }
+
+    fin.close();
 }
+
 
 void PatientManager::saveToFile() const
 {
@@ -88,18 +68,31 @@ void PatientManager::saveToFile() const
 		return;
 	}
 	for (const auto& patient : patients) {
-		fout << "Name: " << patient.get_name() << '\n';
+		fout << "\nName: " << patient.get_name() << '\n';
 		fout << "Age: " << patient.get_age() << '\n';
 		fout << "Gender: " << patient.get_gender() << '\n';
 		fout << "Medical history: " << patient.get_medicalHistory() << '\n';
 		fout << "Family medical history: ";
-		for (const auto& illness : patient.get_familyMedicalHistory()) {
-			fout << illness << ", ";
-		}
-		fout << "\nAppointments:\n";
-		for (const auto& appointment : patient.get_appointments()) {
-			fout << "Doctor: " << appointment.first << ", Date: " << appointment.second << '\n';
-		}
+        if (patient.get_familyMedicalHistory().empty()) {
+            fout << "No family medical history available.\n";
+        }
+        else {
+            for (const auto& illness : patient.get_familyMedicalHistory()) {
+                fout << illness << " ";
+            }
+            fout << '\n';
+        }
+
+		fout << "Appointments:\n";
+
+       if (patient.get_appointments().empty()) {
+            fout << "No appointments\n";
+        }
+        else {
+            for (const auto& appointment : patient.get_appointments()) {
+                fout << "Doctor: " << appointment.first << ", Date: " << appointment.second << '\n';
+            }
+        }
 	}
 	fout.close();
 }

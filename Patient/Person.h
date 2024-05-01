@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <ctime>
 #include "Data.h"
 
 class Person
@@ -14,7 +15,7 @@ protected:
 
 	
 public:
-	Person(const std::string& firstName, const std::string& lastName, Data birthDate, const std::string& gender);
+	Person(const std::string& firstName, const std::string& lastName, const Data& birthDate, const std::string& gender);
 	~Person();
 
 	int calculateAge() const;

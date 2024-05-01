@@ -142,6 +142,9 @@
     <ClCompile Include="PatientManager.cpp" />
     <ClCompile Include="Person.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="file.in" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,14 +1,18 @@
+
 Name: John Doe
-Age: 35
+Age: 43
 Gender: Male
-Medical history: None
-Family medical history: Diabetes, 
+Medical history: no
+Family medical history: Hypertension Diabetes Allergies 
 Appointments:
-	Doctor: Dr. Smith, Date: 2024-04-28
+Doctor: Dr. Johnson, Date: 23/7/1999
+Doctor: Dr. Smith, Date: 24/5/2024
+
 Name: Jane Smith
 Age: 28
 Gender: Female
-Medical history: Allergies
-Family medical history: Heart disease, 
+Medical history: yes
+Family medical history: Allergies Heart_disease 
 Appointments:
-	Doctor: Dr. Johnson, Date: 2024-04-29
+Doctor: Dr. Johnson, Date: 5/8/2022
+Doctor: Dr. Smith, Date: 12/10/2023

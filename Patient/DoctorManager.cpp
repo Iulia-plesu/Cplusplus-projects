@@ -1,4 +1,4 @@
-#include "DoctorManager.h"
+﻿#include "DoctorManager.h"
 
 DoctorManager::DoctorManager(const std::string& fileName)
 	: fileName(fileName)
@@ -6,58 +6,40 @@ DoctorManager::DoctorManager(const std::string& fileName)
 	loadFromFile();
 }
 
-void DoctorManager::loadFromFile()
-{
-	std::ifstream fin(fileName);
-	if (!fin) {
-		std::cerr << "Error opening file\n";
-		return;
-	}
+void DoctorManager::loadFromFile() {
+    std::ifstream fin(fileName);
+    if (!fin) {
+        std::cerr << "Error opening file\n";
+        return;
+    }
 
-	std::string line;
-	while (std::getline(fin, line)) {
+    doctors.clear();
 
-		std::string type, firstName, lastName, gender, speciality;
-		Data* birthDate = new Data(0, 0, 0);
+    std::string line;
+    while (std::getline(fin, line)) {
+        std::string type, firstName, lastName, gender, speciality;
+        int day, month, year;
 
-		size_t pos = line.find(',');
-		type = line.substr(0, pos);
-		line.erase(0, pos + 1);
+        std::istringstream iss(line);
+        if (std::getline(iss, type, ',') &&
+            std::getline(iss, firstName, ',') &&
+            std::getline(iss, lastName, ',') &&
+            iss >> day >> std::ws &&
+            iss >> month >> std::ws &&
+            iss >> year >> std::ws &&
+            std::getline(iss, gender, ',') &&
+            std::getline(iss, speciality)) {
 
-		if (type == "Doctor") {
-			pos = line.find(',');
-			firstName = line.substr(0, pos);
-			line.erase(0, pos + 1);
+            
+            Doctor doctor(firstName, lastName, day, month, year, gender, speciality);
+            doctors.push_back(doctor);
+        }
+        
+    }
 
-			pos = line.find(',');
-			lastName = line.substr(0, pos);
-			line.erase(0, pos + 1);
-
-			pos = line.find(',');
-			birthDate->day = stoi(line.substr(0, pos));
-			line.erase(0, pos + 1);
-			pos = line.find(',');
-			birthDate->month = stoi(line.substr(0, pos));
-			line.erase(0, pos + 1);
-			pos = line.find(',');
-			birthDate->year = stoi(line.substr(0, pos));
-			line.erase(0, pos + 1);
-
-			pos = line.find(',');
-			gender = line.substr(0, pos);
-			line.erase(0, pos + 1);
-			
-			pos = line.find(',');
-			speciality = line.substr(0, pos);
-			line.erase(0, pos + 1);
-
-			Doctor doctor(firstName, lastName, birthDate, gender, speciality);
-			doctors.push_back(doctor);
-		}
-		
-	}
-	fin.close();
+    fin.close();
 }
+
 
 void DoctorManager::saveToFile() const
 {
@@ -83,7 +65,7 @@ void DoctorManager::set_newDoctor(const Doctor& doctor)
 
 void DoctorManager::displayDoctors() const
 {
-	std::cout << "Doctors:\n";
+	std::cout << "\nDoctors:\n";
 	for (const auto& doctor : doctors) {
 		doctor.displayInfo();
 		std::cout << '\n';

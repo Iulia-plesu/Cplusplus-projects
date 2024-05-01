@@ -4,6 +4,7 @@
 struct Data
 {
 	int day, month, year;
+	Data() : day(0), month(0), year(0) {}
 	Data(int day, int month, int year)
 		: day(day)
 		, month(month)

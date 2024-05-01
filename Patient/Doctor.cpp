@@ -1,7 +1,7 @@
 #include "Doctor.h"
 
-Doctor::Doctor(const std::string& firstName, const std::string& lastName, Data birthDate, const std::string& gender, const std::string& speciality)
-    : Person(firstName, lastName, birthDate, gender)
+Doctor::Doctor(const std::string& firstName, const std::string& lastName, int day, int month, int year, const std::string& gender, const std::string& speciality)
+    : Person(firstName, lastName, Data(day, month, year), gender)
     , speciality(speciality)
 {}
 

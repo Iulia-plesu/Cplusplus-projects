@@ -11,7 +11,7 @@ private:
 	std::vector<std::string> familyMedicalHistory;
 	std::map<std::string, Data> appointments;
 public:
-	Patient(const std::string& firstName, const std::string& lastName, Data birthDate, const std::string& gender, const std::string& medicalHistory);
+	Patient(const std::string& firstName, const std::string& lastName, int day, int month, int year, const std::string& gender, const std::string& medicalHistory);
 	~Patient();
 
 	void displayInfo() const override;

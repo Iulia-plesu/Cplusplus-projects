@@ -1,13 +1,9 @@
 #pragma once
 #include <vector>
-//#include <string>
 #include <fstream>
-//#include <sstream>
+#include <sstream>
 #include "Patient.h"
-//#include "Person.h"
-//#include "Doctor.h"
-#//include "Data.h"
-class PatientManager /* : public Patient */
+class PatientManager 
 {
 private:
 	std::vector<Patient> patients;

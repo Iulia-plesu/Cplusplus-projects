@@ -1,7 +1,7 @@
 #include "Patient.h"
 
-Patient::Patient(const std::string& firstName, const std::string& lastName, Data birthDate, const std::string& gender, const std::string& medicalHistory)
-	: Person(firstName, lastName, birthDate, gender)
+Patient::Patient(const std::string& firstName, const std::string& lastName, int day, int month, int year, const std::string& gender, const std::string& medicalHistory)
+	: Person(firstName, lastName, Data(day, month, year), gender)
 	, medicalHistory(medicalHistory)
 {}
 

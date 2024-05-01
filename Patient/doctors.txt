@@ -1,8 +1,8 @@
-Doctor: Dr. Smith
-Age: 45
+Doctor: Smith John
+Age: 49
 Gender: Male
 Speciality: Cardiologist
-Doctor: Dr. Johnson
-Age: 38
+Doctor: Johnson Jane
+Age: 41
 Gender: Female
 Speciality: Dermatologist
