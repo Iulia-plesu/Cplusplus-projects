@@ -14,7 +14,7 @@ private:
 public:
 	DoctorManager(const std::string& fileName);
 
-	void loadFromFile();
+	void readDoctors(std::istringstream& iss);
 	void saveToFile() const;
 
 	void set_newDoctor(const Doctor& doctor);

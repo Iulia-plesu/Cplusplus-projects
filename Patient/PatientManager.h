@@ -11,7 +11,7 @@ private:
 public:
 	PatientManager(const std::string& fileName);
 	
-	void loadFromFile();
+	void readPatients(std::istringstream& iss);
 	void saveToFile() const;
 
 	void set_newPatient(const Patient& patient);

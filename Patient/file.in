@@ -1,4 +1,8 @@
 Patient John Doe 15 6 1980 Male no 3 Hypertension Diabetes Allergies Dr. Smith 24 5 2024 Dr. Johnson 23 7 1999
 Patient Jane Smith 22 8 1995 Female yes 2 Allergies Heart_disease Dr. Johnson 5 8 2022 Dr. Smith 12 10 2023
+Doctor Wilson Michael 8 9 1968 Female Orthopedic Surgeon
+Patient Alice Johnson 10 4 1988 Female no 2 Asthma Migraine Dr. Adams 15 9 2025 Dr. Brown 20 11 2026
+Patient Michael Brown 5 11 1973 Male yes 1 Diabetes
 Doctor Smith John 10 3 1975 Male Cardiologist
 Doctor Johnson Jane 12 5 1982 Female Dermatologist
+Doctor Adams Alice 22 7 1965 Male Neurologist

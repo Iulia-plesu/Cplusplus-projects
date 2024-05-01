@@ -16,7 +16,7 @@ void Patient::displayInfo() const
 	std::cout << "Medical history: " << medicalHistory << '\n';
 	std::cout << "Family medical history: ";
 	for (const auto& illness : familyMedicalHistory) {
-		std::cout << illness << ", ";
+		std::cout << illness << " ";
 	}
 	std::cout << "\nAppointments:\n";
 	for (const auto& appointment : appointments) {

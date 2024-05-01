@@ -1,8 +1,20 @@
+
+Doctor: Wilson Michael
+Age: 55
+Gender: Female
+Speciality: Orthopedic
+
 Doctor: Smith John
 Age: 49
 Gender: Male
 Speciality: Cardiologist
+
 Doctor: Johnson Jane
 Age: 41
 Gender: Female
 Speciality: Dermatologist
+
+Doctor: Adams Alice
+Age: 58
+Gender: Male
+Speciality: Neurologist

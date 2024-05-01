@@ -21,40 +21,12 @@ void readFromFile(const std::string& fileName, PatientManager& patientManager, D
         iss >> type;
 
         if (type == "Patient") {
-            std::string firstName, lastName, gender, medicalHistory, illnesses;
-            int day, month, year, numIllnesses;
-
-            iss >> firstName >> lastName >> day >> month >> year >> gender >> medicalHistory >> numIllnesses;
-
-            Patient patient(firstName, lastName, day, month, year, gender, medicalHistory);
-
-            for (int i = 0; i < numIllnesses; ++i) {
-                std::string illness;
-                iss >> illness;
-                patient.set_familyMedicalHistory(illness);
-            }
-
-            std::string doctorFirstName, doctorLastName;
-            int appointmentDay, appointmentMonth, appointmentYear;
-
-            while (iss >> doctorFirstName >> doctorLastName >> appointmentDay >> appointmentMonth >> appointmentYear) {
-                patient.set_appointment(doctorFirstName, doctorLastName, Data(appointmentDay, appointmentMonth, appointmentYear));
-            }
-
-            patientManager.set_newPatient(patient);
+            patientManager.readPatients(iss);
         }
         else if (type == "Doctor") {
-            std::string firstName, lastName, gender, speciality;
-            int day, month, year;
-
-            iss >> firstName >> lastName >> day >> month >> year >> gender >> speciality;
-
-            Data birthDate(day, month, year);
-            Doctor doctor(firstName, lastName, day, month, year, gender, speciality);
-            doctorManager.set_newDoctor(doctor);
+            doctorManager.readDoctors(iss);
         }
     }
-
     fin.close();
 }
 
@@ -64,8 +36,8 @@ int main() {
 
     readFromFile("file.in", patientManager, doctorManager);
 
-    patientManager.displayPatients();
-    doctorManager.displayDoctors();
+    //patientManager.displayPatients();
+    //doctorManager.displayDoctors();
 
     return 0;
 }
